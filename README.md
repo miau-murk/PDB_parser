@@ -25,13 +25,24 @@ This project uses a locally installed database of PCB ligands - ```Components-pu
 The program is used to work with F -- Phenyl substitutions smiles_substitution.py
 You can read more about this program in the ```readme_smiles_substitution.md``` file.
 
-The script ``converter.py `` is used to convert ``Components-pub.swf`` to smiles format.
+The script ``converter.py `` is used to convert ``Components-pub.sdf`` to smiles format.
 
 3. search
 
 ```bioster_search.py``` is necessary to determine the identity of the mol files. The algorithm calculates Morgan types based on information about valences, stereochemistry and aromaticity of molecules encrypted in mol files. This code is imported into ```bioster_search.py``` which compares the original ```Components-pub.sdf``` database and the created file with bioisosters. As a result, we get a list of potential bioisosters. 
 The ```parser.ipynb``` script for each of the found bioisosters parses information about protein complexes from the PDB, taking into account the selection criteria (for example, matching pH, method, absence of HEM, etc.)
 
+4. sources_file
+
+Local databases
+
+5. created_files
+
+Files created as a result of scripts.
+
+6. result_tables
+
+Summary tables of bioisosters and protein data.
 
 <!--description of commits-->
 ## description of commits
