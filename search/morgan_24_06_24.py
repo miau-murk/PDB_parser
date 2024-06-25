@@ -152,10 +152,10 @@ def read_blok(blok, mol):
     return name, xyz, sorted_graph
 
 def remove_hydrogens_without_removeHs(molecule):
-    # Create a new editable molecule
+    # Создает новую редактируемую молекулу
     emol = Chem.EditableMol(Chem.Mol())
 
-    # Create a mapping for atom index from old molecule to new molecule
+    # Создает отображение индекса атома от старой молекулы к новой молекуле
     index_map = {}
     for atom in molecule.GetAtoms():
         if atom.GetAtomicNum() == 1:  # Skip hydrogens, which have atomic number 1
@@ -163,7 +163,7 @@ def remove_hydrogens_without_removeHs(molecule):
         new_index = emol.AddAtom(atom)
         index_map[atom.GetIdx()] = new_index
 
-    # Add bonds between non-hydrogen atoms in the new molecule
+    # Добавляет связи между атомами водорода в новую молекулу
     for bond in molecule.GetBonds():
         begin_atom_idx = bond.GetBeginAtomIdx()
         end_atom_idx = bond.GetEndAtomIdx()
@@ -174,10 +174,10 @@ def remove_hydrogens_without_removeHs(molecule):
             end_atom_new_idx = index_map[end_atom_idx]
             emol.AddBond(begin_atom_new_idx, end_atom_new_idx, bond.GetBondType())
 
-    # Get a molecule from the editable molecule
+    # Получает молекулу из редактируемой молекулы
     new_molecule = emol.GetMol()
 
-    # Update atom properties and coordinates if we have them
+    # Обновляет свойства атома и координаты, если они у нас есть
     new_molecule.UpdatePropertyCache()
 
     return new_molecule
