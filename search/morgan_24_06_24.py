@@ -62,13 +62,13 @@ def GetRingSystems(mol, includeSpiro=False):
         sys.append(h)
     return sys
 
-# функция находит кратчайшее расстояние между двумя вершинами графа
-# не используется
+# function finds the shortest distance between two vertices of a graph
+# not in use
 
+# function takes a set of vectors in three-dimensional space as input, if they
+# can uniquely form a new basis, it outputs the sign of the determinant of the transition matrix to this new basis
+# needs to be improved
 
-# функция получает на вход набор векторов в трёхмерном пространстве, если из них
-# можно единственным образом составить новый базис, то она выводит знак детерминанта матрицы перехода в этот новый базис
-# нужно доработать
 def find_coord_orientation(a:list):
     
     n_array = np.array(a)
@@ -131,7 +131,7 @@ def read_blok(blok, mol):
         else:
             graph[int(k[0])][int(k[1])] = int(k[2])
 
-    # Дополняем соседей для каждого атома
+    # Adding neighbors for each atom
     N = len(xyz)
     for i in range(1, N + 1):
         if i not in list(graph.keys()):
@@ -152,10 +152,10 @@ def read_blok(blok, mol):
     return name, xyz, sorted_graph
 
 def remove_hydrogens_without_removeHs(molecule):
-    # Создает новую редактируемую молекулу
+    # Creates a new editable molecule
     emol = Chem.EditableMol(Chem.Mol())
 
-    # Создает отображение индекса атома от старой молекулы к новой молекуле
+    # Creates a mapping of atom indices from the old molecule to the new molecule
     index_map = {}
     for atom in molecule.GetAtoms():
         if atom.GetAtomicNum() == 1:  # Skip hydrogens, which have atomic number 1
@@ -163,7 +163,7 @@ def remove_hydrogens_without_removeHs(molecule):
         new_index = emol.AddAtom(atom)
         index_map[atom.GetIdx()] = new_index
 
-    # Добавляет связи между атомами водорода в новую молекулу
+    # Adds bonds between hydrogen atoms in the new molecule
     for bond in molecule.GetBonds():
         begin_atom_idx = bond.GetBeginAtomIdx()
         end_atom_idx = bond.GetEndAtomIdx()
@@ -174,10 +174,10 @@ def remove_hydrogens_without_removeHs(molecule):
             end_atom_new_idx = index_map[end_atom_idx]
             emol.AddBond(begin_atom_new_idx, end_atom_new_idx, bond.GetBondType())
 
-    # Получает молекулу из редактируемой молекулы
+    # Gets the molecule from the editable molecule
     new_molecule = emol.GetMol()
 
-    # Обновляет свойства атома и координаты, если они у нас есть
+   # Updates the atom properties and coordinates if they are available
     new_molecule.UpdatePropertyCache()
 
     return new_molecule
@@ -216,7 +216,7 @@ class MorganTypes:
         coordsys_cont = []
         neighb = m 
         if self.xyz[neighb][1] == "C":
-            for neighb_C in self.graph[neighb].keys(): # находим всех соседей С
+            for neighb_C in self.graph[neighb].keys(): # # find all neighbors of "C"
                 if neighb_C != atom:
                     coordsys_cont.append(neighb_C)
         if len(coordsys_cont) != 3:
