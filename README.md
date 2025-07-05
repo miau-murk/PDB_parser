@@ -40,16 +40,3 @@ Local databases
 
 Files created as a result of scripts.
 
-6. result_tables
-
-Summary tables of bioisosters and protein data.
-
-<!--description of commits-->
-## description of commits
-| Commit   | Description                                                     |
-|----------|-----------------------------------------------------------------|
-|   	   |                                                                 |
-|   	   |                                                                 |
-|   	   |                                                                 |
-|   	   |                                                                 |
-|   	   |                                                                 |
